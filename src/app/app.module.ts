@@ -13,12 +13,14 @@ import { AuthService } from './common/auth/auth.service';
 import { AuthGuard } from './common/auth/auth.guard';
 import { LoginComponent } from './common/auth/login.component';
 import { TokenInterceptor } from './common/auth/token.interceptor';
+import { signUpComponent } from './common/auth/sign-up.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     LoginComponent,
+    signUpComponent,
   ],
   imports: [
     BrowserModule,
