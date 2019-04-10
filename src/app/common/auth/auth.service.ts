@@ -35,4 +35,7 @@ export class AuthService {
     logout(): void {
         this.token.next(null);
     }
+    //signUP(firstName: string,
+      //  lastName: string,email:string,password:string,phonenumber:string):Observable<any>{
+     //        }
 }

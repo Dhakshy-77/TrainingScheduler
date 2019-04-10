@@ -1,21 +1,22 @@
-<h2>signUp</h2>
+<h2>Sign Up</h2>
 <form>
     <div class="row">
-      <div class="col-md-6">
-        <label>FirstName</label>
+        <div class="col-md-6">
+        <label>First Name *</label>
         <input type="text" class="form-control" [(ngModel)]="firstName" name="firstName"/>
-        <label>LastName</label>
+        <label>Last Name *</label>
         <input type="text" class="form-control" [(ngModel)]="lastName" name="lastName"/>
-        <label>Email</label>
+        <label>Phone Number</label>
+        <input type="text" class="form-control" [(ngModel)]="phoneNumber" name="phoneNumber"/>
+        <label>Email *</label>
         <input type="text" class="form-control" [(ngModel)]="email" name="email"/>
-        <label>Password</label>
-        <input type="password" class="form-control" [(ngModel)]="password" name="password"/>
-        <label>Phonenumber</label>
-        <input type="text" class="form-control" [(ngModel)]="phonenumber" name="phonenumber" />
-      </div>
-      <div class="col-md-6">
-      </div>
+        <label>Password *</label>
+        <input type="password" class="form-control" [(ngModel)]="password" name="password" />
+        <label name="labelError"></label>
+        </div>
+        <div class="col-md-6">
+        </div>
     </div>
     <br>
     <button type="submit" class="btn btn-primary" (click)="signUp()">Submit</button>
-    </form>
+</form>

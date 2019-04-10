@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "root",
-    "password": "miles",
-    "database": "TrainingScheduler",
-    "host": "127.0.0.1",
+    "username": "GPurushothaman",
+    "password": "LA193555*rd",
+    "database": "Training_Scheduler_GPurushothaman",
+    "host": "172.31.252.135",
     "dialect": "mysql"
   },
   "test": {

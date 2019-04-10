@@ -4,6 +4,7 @@ require('./config/sync_config/config');
 const models = require('./models');
 require('./global_functions');
 const userController = require('./controllers/UsersController');
+const eventController = require('./controllers/EventsController');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const JwtStrategy = require('passport-jwt').Strategy;
@@ -76,4 +77,8 @@ app.put(
   userController.update,
 );
 app.post('/login', userController.login);
+app.post('/events', eventController.create);
+app.put('/events', eventController.update);
+app.get('/events', eventController.readEvent);
+app.delete('/events', eventController.deleteEvent);
 module.exports = app;
