@@ -1,6 +1,3 @@
-//REF:https://coursework.vschool.io/express-params-and-query/
-//REF:https://blog.risingstack.com/mastering-async-await-in-nodejs/ 
-
 const Events = require('../models').Events;
 const create = async function (req, res) {
   res.setHeader('ContentType', 'application/json');
@@ -29,9 +26,13 @@ module.exports.createEvent = createEvent;
 
 const readEvent = async function (req, res) {
   let err, event;
-  if (!req.query) return ReE(res, 'No query parameters found', 404);
-  [err, event] = await to(Events.findOne({ where: { id: req.query.id } }));
-  if (err) return ReE(res, 'No id parameter?', 422);
+  if (req.query && req.query.length > 0) {
+  //  return ReE(res, 'No query parameters found', 404);
+      [err, event] = await to(Events.findOne({ where: { id: req.query.id } }));
+  } else{
+    [err, event] = await to(Events.findAll());
+  }
+  if (err) return ReE(res, 'Failed to read', 422);
   if (!event) {
     return ReE(res, 'No event found', 404);
   }
@@ -39,7 +40,7 @@ const readEvent = async function (req, res) {
 }
 module.exports.readEvent = readEvent;
 
-const updateEvent = async function (req, res) {
+const update = async function (req, res) {
   let err, event, data;
   if (!req.query) return ReE(res, 'No query parameters found', 404);
   [err, event] = await to(Events.findOne({ where: { id: req.query.id } }));
@@ -47,7 +48,6 @@ const updateEvent = async function (req, res) {
   if (!event) {
     return ReE(res, 'No event found', 404);
   }
-  event = req.event;
   data = req.body;
   event.set(data);
   [err, event] = await to(event.save());
@@ -60,10 +60,9 @@ const updateEvent = async function (req, res) {
     res.statusCode = 422
     return res.json({ success: false, error: err });
   }
-
   return res.json(event);
 }
-module.exports.updateEvent = updateEvent;
+module.exports.update = update;
 
 const deleteEvent = async function (req, res) {
   let err, numDeleted;
@@ -76,3 +75,6 @@ const deleteEvent = async function (req, res) {
   return res.json({ success: true, numberDeleted: numDeleted });
 }
 module.exports.deleteEvent = deleteEvent;
+
+//REF:https://coursework.vschool.io/express-params-and-query/
+//REF:https://blog.risingstack.com/mastering-async-await-in-nodejs/ 

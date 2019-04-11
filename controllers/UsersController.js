@@ -45,9 +45,7 @@ module.exports.login = login;
 
 const authUser = async function (userInfo) {//returns token
 
-
   if (!userInfo.email) TE('Please enter an email to login');
-
 
   if (!userInfo.password) TE('Please enter a password to login');
 
@@ -74,7 +72,12 @@ module.exports.authUser = authUser;
 
 const update = async function (req, res) {
   let err, user, data;
-  user = req.user;
+  if(!req.query) return ReE(res,'No query parameters',404);
+  [err,user] = await to(Users.findOne({ where: {id: req.query.id } }));
+  if(err) return ReE(res,'No id found?',422);
+  if(!user){
+     return ReE(res, 'No user found',404);
+  }
   data = req.body;
   user.set(data);
   [err, user] = await to(user.save());
@@ -86,8 +89,12 @@ const update = async function (req, res) {
     if (typeof code !== 'undefined') res.statusCode = code;
     res.statusCode = 422
     return res.json({ success: false, error: err });
-  }
-
-  return res.json(user);
+    }
+     return res.json(user);
 }
 module.exports.update = update;
+
+const getCurrentUser = async function(req,res){
+  return res.json(req.user);
+}
+module.exports.getCurrentUser = getCurrentUser;

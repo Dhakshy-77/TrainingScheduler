@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -14,6 +14,8 @@ import { AuthGuard } from './common/auth/auth.guard';
 import { LoginComponent } from './common/auth/login.component';
 import { TokenInterceptor } from './common/auth/token.interceptor';
 import { signUpComponent } from './common/auth/sign-up.component';
+import { ToDoInfoComponent } from './to-do-info/to-do-info.component';
+import { UserProfileComponent } from './common/user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,8 @@ import { signUpComponent } from './common/auth/sign-up.component';
     HomeComponent,
     LoginComponent,
     signUpComponent,
+    ToDoInfoComponent,
+    UserProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,6 +33,7 @@ import { signUpComponent } from './common/auth/sign-up.component';
     HttpClientModule,
     NgbModule,
     AppRoutingModule,
+    ReactiveFormsModule,
   ],
   providers: [
     AuthService,

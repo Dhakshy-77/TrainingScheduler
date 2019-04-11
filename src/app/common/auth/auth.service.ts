@@ -35,7 +35,25 @@ export class AuthService {
     logout(): void {
         this.token.next(null);
     }
-    //signUP(firstName: string,
-      //  lastName: string,email:string,password:string,phonenumber:string):Observable<any>{
-     //        }
+    signUp(firstName: string, lastName: string, phoneNumber: string, email: string, password: string): Observable<any> {
+        const data = {
+            first: firstName,
+            last: lastName,
+            phone: phoneNumber,
+            email: email,
+            password: password,
+            userRoleId: 2,
+            aboutMe: null,
+        };
+        if (!data.phone) data.phone = null;
+        return this.http.post('http://localhost:3000/users', data);
+    }
+
+    updateUserInfo(userId: Number, userInfo: any): Observable<any> {
+        return this.http.put('http://localhost:3000/users?id=' + userId, userInfo);
+    }
+
+    getCurrentUser(): Observable<any> {
+        return this.http.get('http://localhost:3000/getUser');
+    }
 }
