@@ -16,6 +16,7 @@ module.exports = {
       },
       email: {
         type: Sequelize.STRING,
+        unique:true,
       },
       phone: {
         type: Sequelize.STRING,
@@ -25,6 +26,11 @@ module.exports = {
       },
       password: {
         type: Sequelize.STRING,
+      },
+      isTrainer:{
+        allowNull: false,
+        defaultValue: false,
+        type: Sequelize.BOOLEAN,
       },
       createdAt: {
         allowNull: false,

@@ -7,8 +7,8 @@ import { AuthService } from './auth.service';
 })
 export class LoginComponent implements OnInit {
 
-    email = '';
-    password = '';
+    email = 'geetha@miles.com';
+    password = 'g';
 
     constructor(
         private router: Router,
@@ -17,20 +17,22 @@ export class LoginComponent implements OnInit {
 
     ngOnInit() {
     }
+//Is current user an Admin?
 
-    login(): void {
+login(): void{
+//This point doing admin process and calling login() in authService.
+
         this.authService.login(this.email, this.password)
             .subscribe(
                 (response) => {
-                    if (response.success) {
-                        console.log('successful login');
+                    if(response.success){
+                        console.log('Login success');
                         this.router.navigateByUrl('/home');
                     }
                 },
-                (error) => {
-                    console.log('username/password incorrect');
-                }
-            );
+            (error) => {
+                console.log('please check email/password ')
+            }
+        );
     }
-
 }

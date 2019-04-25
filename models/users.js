@@ -28,6 +28,11 @@ module.exports = (sequelize, DataTypes) => {
       },
       aboutMe: DataTypes.STRING,
       password: DataTypes.STRING,
+      isTrainer: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
+      },
     },
     {
       classMethods: {
@@ -35,8 +40,8 @@ module.exports = (sequelize, DataTypes) => {
           // associations can be defined here
             models.Users.belongsTo(models.UserRoles,
             {
-            foreignkey :"UserRoleId",
-            sourcekey:"id",
+            foreignkey: "userRoleId",
+            sourcekey: "id",
             });
         },
       },

@@ -16,6 +16,15 @@ import { TokenInterceptor } from './common/auth/token.interceptor';
 import { signUpComponent } from './common/auth/sign-up.component';
 import { ToDoInfoComponent } from './to-do-info/to-do-info.component';
 import { UserProfileComponent } from './common/user-profile/user-profile.component';
+import { EventListComponent } from './common/event-list/event-list.component';
+import { AddEventComponent } from './common/add-event/add-event.component';
+import { EventInfoComponent } from './common/event-info/event-info.component';
+import { NoAdminGuard } from './common/auth/no-admin.guard';
+import { AddSessionComponent } from './common/add-session/add-session.component';
+import { SessionListComponent } from './common/session-list/session-list.component';
+import { TrainerGuard } from './common/auth/trainer.guard';
+import { EventSearchComponent } from './common/event-search/event-search.component';
+import { EventDetailsComponent } from './common/event-details/event-details.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +34,13 @@ import { UserProfileComponent } from './common/user-profile/user-profile.compone
     signUpComponent,
     ToDoInfoComponent,
     UserProfileComponent,
+    EventListComponent,
+    AddEventComponent,
+    EventInfoComponent,
+    AddSessionComponent,
+    SessionListComponent,
+    EventSearchComponent,
+    EventDetailsComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,6 +54,8 @@ import { UserProfileComponent } from './common/user-profile/user-profile.compone
   providers: [
     AuthService,
     AuthGuard,
+    NoAdminGuard,
+    TrainerGuard,
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]

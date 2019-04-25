@@ -11,6 +11,7 @@ export class signUpComponent  {
     email ='';
     password =''; 
     phonenumber ='';
+    isTrainer = false;
     //constructor(private authService:AuthService){}
     constructor(
         private authService: AuthService,
@@ -23,9 +24,11 @@ export class signUpComponent  {
             email: this.email,
             password: this.password,
             phonenumber: this.phonenumber,
+            isTrainer: this.isTrainer,
             };
-    if(newUser.firstName && newUser.lastName && newUser.email && newUser.password && newUser.phonenumber){
-        this.authService.signUp(newUser.firstName, newUser.lastName, newUser.phonenumber, newUser.email, newUser.password).subscribe(
+            //&& newUser.isTrainer
+    if(newUser.firstName && newUser.lastName && newUser.email && newUser.password){
+        this.authService.signUp(newUser.firstName, newUser.lastName, newUser.email, newUser.password, newUser.phonenumber,newUser.isTrainer).subscribe(
             (response) => this.router.navigateByUrl('/login')
         );
         document.getElementsByName("labelError")[0].innerText = '';  

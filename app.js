@@ -5,6 +5,7 @@ const models = require('./models');
 require('./global_functions');
 const userController = require('./controllers/UsersController');
 const eventController = require('./controllers/EventsController');
+const sessionController = require('./controllers/SessionsController');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const JwtStrategy = require('passport-jwt').Strategy;
@@ -32,7 +33,7 @@ passport.use(
     }
   }),
 );
-// CORS
+
 app.use(function(req, res, next) {
   // Website you wish to allow to connect
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -76,12 +77,54 @@ app.put(
   passport.authenticate('jwt', { session: false }),
   userController.update,
 );
+
+app.get('/users',
+  passport.authenticate('jwt', { session: false }),
+  userController.readUser,
+);
+
+app.get(
+  '/getUser',
+  passport.authenticate('jwt', { session: false }),
+  userController.getCurrentUser,
+);
 app.post('/login', userController.login);
-app.post('/events', eventController.create);
+app.post(
+  '/events',
+  passport.authenticate('jwt', { session: false }), 
+  eventController.create,
+  );
 app.put('/events', eventController.update);
 app.get('/events', eventController.readEvent);
 app.delete('/events', eventController.deleteEvent);
-app.get('/getUser',passport.authenticate('jwt',{session:false}),
-userController.getCurrentUser);
-
+app.get(
+  '/getUser',
+  passport.authenticate('jwt',{session:false}),
+  eventController.readEventsForUser,
+  );
+  app.get(
+    '/getEventsUpcoming',
+    eventController.readEventsUpcoming,
+  );
+  
+  app.post(
+    '/sessions',
+    passport.authenticate('jwt', { session: false }),
+    sessionController.create,
+  );
+  
+  app.put('/sessions', sessionController.update);
+  app.get('/sessions', sessionController.readSession);
+  app.delete('/sessions', sessionController.deleteSession);
+  app.get(
+    '/getSessions',
+    passport.authenticate('jwt', { session: false }),
+    sessionController.readSessionsForUser,
+  );
+  
+  app.get(
+    '/getSessionsWithTrainerInfo',
+    passport.authenticate('jwt', { session: false }),
+    sessionController.readSessionsWithTrainerInfo,
+    );
 module.exports = app;

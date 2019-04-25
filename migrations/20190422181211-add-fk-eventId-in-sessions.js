@@ -9,14 +9,15 @@ module.exports = {
       Example:
       return queryInterface.createTable('users', { id: Sequelize.INTEGER });
     */
-   return queryInterface.addColumn('Events', 'userId', {
+   return queryInterface.addColumn('Sessions', 'eventId', {
     type: Sequelize.INTEGER,
     references: {
-      model: 'Users',
+      model: 'Events',
       key: 'id',
     },
+
     onUpdate: 'CASCADE',
-    onDelete: 'SET NULL',
+    onDelete: 'CASCADE',
   });
   },
 
@@ -27,8 +28,7 @@ module.exports = {
 
       Example:
       return queryInterface.dropTable('users');
-      
     */
-   return queryInterface.removeColumn('Events', 'userId');
+    return queryInterface.removeColumn('Sessions', 'eventId');
   }
 };

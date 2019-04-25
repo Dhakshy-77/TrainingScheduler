@@ -11,6 +11,8 @@ export class AuthGuard implements CanActivate {
         private authService: AuthService,
         private router: Router,
     ) { }
+//Return an observable of boolean that can tell whether can activate or not.  
+//If not authenticated return route to login page.
 
     canActivate(route: ActivatedRouteSnapshot): Observable<boolean> {
         const isAuthenticated = this.authService.isAuthenticated();

@@ -1,0 +1,15 @@
+<h2>Event List</h2>
+<div class="row" [formGroup]="searchForm">
+  <div class="col-md-8">
+    <label>Search:</label>
+    <input class="form-control" formControlName="query" placeholder="Enter text to search..."/>
+  </div>
+</div>
+<!-- Styling comes with bootstrap -->
+<div class="list-group">
+<!-- Repeat anchor tag as many times there are objects in array events -->
+  <a *ngFor="let event of events" class="list-group-item list-group-item-action" routerLink="/event-info/{{ event.id }}">
+<!--Bring 0 th position of array-->
+    {{ event.name }}
+  </a>
+</div>

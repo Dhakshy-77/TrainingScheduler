@@ -35,38 +35,27 @@ module.exports.createUser = createUser;
 const login = async function (req, res) {
   const body = req.body;
   let err, user;
-
   [err, user] = await to(authUser(req.body));
   if (err) return ReE(res, err, 422);
-
   return ReS(res, { token: user.getJWT(), user: user.toJSON() });
 }
 module.exports.login = login;
 
-const authUser = async function (userInfo) {//returns token
+const authUser = async function (userInfo) {
 
   if (!userInfo.email) TE('Please enter an email to login');
-
   if (!userInfo.password) TE('Please enter a password to login');
-
   let user;
   if (validator.isEmail(userInfo.email)) {
-
     [err, user] = await to(Users.findOne({ where: { email: userInfo.email } }));
     if (err) TE(err.message);
-
   } else {
     TE('A valid email was not entered');
   }
-
   if (!user) TE('Not registered');
-
   [err, user] = await to(user.comparePassword(userInfo.password));
-
   if (err) TE(err.message);
-
   return user;
-
 }
 module.exports.authUser = authUser;
 
@@ -98,3 +87,20 @@ const getCurrentUser = async function(req,res){
   return res.json(req.user);
 }
 module.exports.getCurrentUser = getCurrentUser;
+
+const readUser = async function (req, res) {
+  let err, user;
+  if (req.query && req.query.id) {
+    [err, user] = await to(Users.findOne({ where: { id: req.query.id } }));
+  } else if (req.query && req.query.isTrainer) {
+    [err, user] = await to(Users.findAll({ where: { isTrainer: req.query.isTrainer } }));
+  } else {
+    [err, user] = await to(Users.findAll());
+  }
+  if (err) return ReE(res, 'Failed to read', 422);
+  if (!user) {
+    return ReE(res, 'No user found', 404);
+  }
+  return res.json(user);
+}
+module.exports.readUser = readUser;

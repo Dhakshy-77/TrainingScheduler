@@ -12,6 +12,8 @@
         <input type="text" class="form-control" [(ngModel)]="email" name="email"/>
         <label>Password *</label>
         <input type="password" class="form-control" [(ngModel)]="password" name="password" />
+        <label>Is Trainer?</label>
+        <input type="checkbox" [(ngModel)]="isTrainer" name="isTrainer"/>
         <label name="labelError"></label>
         </div>
         <div class="col-md-6">
@@ -19,4 +21,4 @@
     </div>
     <br>
     <button type="submit" class="btn btn-primary" (click)="signUp()">Submit</button>
-</form>
+</form> 

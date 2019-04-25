@@ -7,9 +7,10 @@ import { AuthService } from './common/auth/auth.service';
   styleUrls: ['./app.component.less']
 })
 export class AppComponent implements OnInit {
-
   loggedIn = false;
-
+  isAdmin = false;
+  isTrainer = false;
+   
   constructor(
     private authService: AuthService,
   ) { }
@@ -17,6 +18,10 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.authService.token
       .subscribe((token) => this.loggedIn = token ? true : false);
+    this.authService.isAdmin
+      .subscribe((value) => this.isAdmin = value);
+    this.authService.isTrainer
+      .subscribe((value) => this.isTrainer = value);  
   }
 
   logout(): void {

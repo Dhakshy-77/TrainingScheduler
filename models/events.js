@@ -1,4 +1,40 @@
 'use strict';
+
+module.exports = (sequelize, DataTypes) => {
+
+  const Events = sequelize.define('Events', {
+
+    name: DataTypes.STRING,
+
+    description: DataTypes.STRING,
+
+    startTime: DataTypes.DATE,
+
+    endTime: DataTypes.DATE,
+
+    userId: DataTypes.INTEGER,
+
+    location: DataTypes.STRING,
+
+  }, {});
+
+  Events.associate = function(models) {
+
+    // associations can be defined here
+
+    models.Events.belongsTo(models.UserRoles, {
+
+      foreignKey: 'userId',
+
+      sourceKey: 'id',
+
+    });
+
+  };
+  return Events;
+};
+
+/* 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const events = sequelize.define('events', {
     userid: DataTypes.INTEGER,
@@ -11,11 +47,10 @@ module.exports = (sequelize, DataTypes) => {
   events.associate = function(models) {
     // associations can be defined here
    
-  /* models.Events.belongsTo(models.UserRoles, {
+   models.events.belongsTo(models.UserRoles, {
       foreignKey: 'userid',
       sourceKey: 'id',
-    });*/
+    });
   };
   return events;
-};
- 
+};  */
